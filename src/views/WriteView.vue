@@ -8,7 +8,7 @@ const content = ref('')
 
 const write = function() {
   axios.post(
-    'http://localhost:8080/posts',
+    '/f1v3-api/posts',
     {
       title: title.value,
       content: content.value

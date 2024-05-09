@@ -10,10 +10,16 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    VueDevTools(),
+    VueDevTools()
   ],
   server: {
-    port : 3000
+    port: 3000,
+    proxy: {
+      '/f1v3-api': {
+        target: 'http://localhost:8080',
+        rewrite: (path) => path.replace(/^\/f1v3-api/, '')
+      }
+    }
   },
   resolve: {
     alias: {
