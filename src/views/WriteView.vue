@@ -2,9 +2,11 @@
 
 import { ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 const title = ref('')
 const content = ref('')
+const router = useRouter()
 
 const write = function() {
   axios.post(
@@ -12,7 +14,11 @@ const write = function() {
     {
       title: title.value,
       content: content.value
-    });
+    })
+    .then(() => {
+      alert('글 작성이 완료되었습니다.')
+      router.replace({ name: 'home' })
+    })
 }
 
 </script>
