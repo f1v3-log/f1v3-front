@@ -16,7 +16,6 @@ const write = function() {
       content: content.value
     })
     .then(() => {
-      alert('글 작성이 완료되었습니다.')
       router.replace({ name: 'home' })
     })
 }
@@ -25,30 +24,18 @@ const write = function() {
 
 <template>
   <div>
-    <el-input
-      v-model="title"
-      placeholder="멋진 제목을 입력해보세요! 🚀"
-    />
+    <el-input v-model="title" placeholder="멋진 제목을 입력해보세요! 🚀" />
   </div>
 
   <div class="mt-2">
-    <el-input
-      v-model="content"
-      type="textarea"
-      rows="15">
-    </el-input>
+    <el-input v-model="content" type="textarea" rows="15"/>
   </div>
 
   <div class="mt-2">
-    <el-button
-      type="primary"
-      round
-      @click="write()">
-      글 작성 완료
-    </el-button>
+    <div class="d-flex justify-content-end">
+      <el-button type="primary" round @click="write()">글 작성 완료</el-button>
+    </div>
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

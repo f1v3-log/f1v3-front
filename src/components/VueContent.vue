@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <el-main class="content">
     <el-row>
@@ -10,6 +7,8 @@
     </el-row>
   </el-main>
 </template>
+
+<script setup lang="ts"></script>
 
 <style scoped>
 .content {

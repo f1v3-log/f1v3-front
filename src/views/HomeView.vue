@@ -43,7 +43,8 @@ ul {
 
     .title {
       a {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
         color: #353535;
         text-decoration: none;
       }
