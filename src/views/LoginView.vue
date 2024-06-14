@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import Login from '@/entity/user/Login'
+import axios from 'axios'
+import router from '@/router'
 
 const state = reactive({
     login: new Login()
 })
 
 function doLogin() {
-    console.log('>> ', state.login)
+    axios.post('/f1v3-api/auth/login', state.login).then(() => {
+        router.replace({ name: 'home' })
+    })
 }
 </script>
 
