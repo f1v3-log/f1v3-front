@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import Login from '@/entity/user/Login'
-import axios, { type AxiosError } from 'axios'
+import { type AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import AxiosHttpClient from '@/http/AxiosHttpClient'
+import type HttpError from '@/http/HttpError'
 
 const state = reactive({
     login: new Login()
@@ -12,14 +14,20 @@ const state = reactive({
 const router = useRouter()
 
 function doLogin() {
-    axios
-        .post('/f1v3-api/auth/login', state.login)
-        .then(() => {
-            ElMessage({ type: 'success', message: '환영합니다.' })
+    const httpClient = new AxiosHttpClient()
+
+    httpClient
+        .request({
+            method: 'POST',
+            data: state.login,
+            url: '/f1v3-api/auth/login'
+        })
+        .then((response: AxiosResponse) => {
+            ElMessage({ type: 'success', message: '환영합니다. :)' })
             router.replace('/')
         })
-        .catch((e: AxiosError) => {
-            ElMessage({ type: 'error', message: e.response?.data.message })
+        .catch((e: HttpError) => {
+            ElMessage({ type: 'error', message: e.getMessage() })
         })
 }
 </script>
