@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import Login from '@/entity/user/Login'
-import { type AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import AxiosHttpClient from '@/http/AxiosHttpClient'
@@ -17,13 +16,12 @@ function doLogin() {
     const httpClient = new AxiosHttpClient()
 
     httpClient
-        .request({
-            method: 'POST',
-            data: state.login,
-            url: '/f1v3-api/auth/login'
+        .post({
+            path: '/f1v3-api/auth/login',
+            body: state.login
         })
-        .then((response: AxiosResponse) => {
-            ElMessage({ type: 'success', message: '환영합니다. :)' })
+        .then((data: any) => {
+            ElMessage({ type: 'success', message: '환영합니다. 👻' })
             router.replace('/')
         })
         .catch((e: HttpError) => {
