@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import AxiosHttpClient from '@/http/AxiosHttpClient'
 import type HttpError from '@/http/HttpError'
 import UserRepository from '@/repository/UserRepository'
+import { container } from 'tsyringe'
 
 const state = reactive({
     login: new Login()
@@ -13,7 +14,7 @@ const state = reactive({
 
 const router = useRouter()
 
-const USER_REPOSITORY = new UserRepository()
+const USER_REPOSITORY = container.resolve(UserRepository)
 
 function doLogin() {
     const httpClient = new AxiosHttpClient()
