@@ -12,10 +12,4 @@ export default class PostRepository {
             body: request
         })
     }
-
-    public get(postId: number) {
-        return this.httpRepository.get({
-            path: `/f1v3-api/posts/${postId}`
-        })
-    }
 }
