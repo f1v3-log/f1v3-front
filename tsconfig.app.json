@@ -9,6 +9,8 @@
     "src/**/__tests__/*"
   ],
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
@@ -16,8 +18,6 @@
       "@/*": [
         "./src/*"
       ]
-    },
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    }
   }
 }

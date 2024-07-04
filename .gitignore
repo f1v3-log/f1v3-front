@@ -47,3 +47,6 @@ coverage
 # Ignore all local history of files
 .history
 .ionide
+
+# f1v3-log
+nodeenv-16
