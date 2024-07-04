@@ -26,4 +26,11 @@ export default class PostRepository {
                 return plainToInstance(Post, response)
             })
     }
+
+    public getList() {
+        return this.httpRepository
+            .get({
+                path: `/f1v3-api/posts?page=1&size=3`
+            })
+    }
 }

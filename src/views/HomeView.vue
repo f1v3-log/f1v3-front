@@ -1,82 +1,87 @@
 <script setup lang="ts">
-import axios from 'axios'
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import PostRepository from '@/repository/PostRepository'
+import { container } from 'tsyringe'
+import Post from '@/components/Post.vue'
 
-const posts = ref([])
+const POST_REPOSITORY = container.resolve(PostRepository)
 
-axios.get('/f1v3-api/posts?page=1&size=5').then((response) => {
-  response.data.forEach(p => {
-    posts.value.push(p)
-  })
+const state = reactive({
+    postList: []
+})
+
+function getList() {
+    POST_REPOSITORY.getList()
+        .then((postList) => {
+            console.log('>>>', postList)
+            state.postList = postList
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
+onMounted(() => {
+    getList()
 })
 </script>
 
 <template>
-  <ul>
-    <li v-for="post in posts" :key="post.id">
-      <div class="title">
-        <router-link :to="{name: 'read', params: {postId: post.id}}">
-          {{ post.title }}
-        </router-link>
-      </div>
-
-      <div class="content">
-        {{ post.content }}
-      </div>
-
-      <div class="sub d-flex">
-        <div class="category">개발</div>
-        <div class="regDate">2024-05-10</div>
-      </div>
-    </li>
-  </ul>
+    <div class="content">
+        <ul class="posts">
+            <li v-for="post in state.postList" :key="post.id">
+                <Post :post="post" />
+            </li>
+        </ul>
+    </div>
 </template>
 
 <style scoped lang="scss">
 
 ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 
-  li {
-    margin-bottom: 2rem;
+    li {
+        margin-bottom: 2rem;
 
-    .title {
-      a {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #353535;
-        text-decoration: none;
-      }
+        .title {
+            a {
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #353535;
+                text-decoration: none;
+            }
 
-      &:hover {
-        text-decoration: underline;
-      }
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .content {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            color: #777777;
+        }
     }
 
-    .content {
-      font-size: 0.9rem;
-      margin-top: 8px;
-      color: #777777;
+    &:last-child {
+        margin-bottom: 0;
     }
-  }
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+    .sub {
+        margin-top: 8px;
+        font-size: 0.78rem;
 
-  .sub {
-    margin-top: 8px;
-    font-size: 0.78rem;
+        .category {
+            font-weight: bold;
+        }
 
-    .category {
-      font-weight: bold;
+        .regDate {
+            margin-left: 8px;
+            color: #302c50;
+        }
     }
-    .regDate {
-      margin-left: 8px;
-      color: #302c50;
-    }
-  }
 }
 
 </style>
