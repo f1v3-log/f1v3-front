@@ -13,11 +13,7 @@ const state = reactive({
 function getList() {
     POST_REPOSITORY.getList()
         .then((postList) => {
-            console.log('>>>', postList)
             state.postList = postList
-        })
-        .catch((error) => {
-            console.log(error)
         })
 }
 

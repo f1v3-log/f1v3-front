@@ -32,5 +32,8 @@ export default class PostRepository {
             .get({
                 path: `/f1v3-api/posts?page=1&size=3`
             })
+            .then((response) => {
+                return plainToInstance(Post, response)
+            })
     }
 }
