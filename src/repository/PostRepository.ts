@@ -1,12 +1,13 @@
 import HttpRepository from '@/repository/HttpRepository'
 import { inject, singleton } from 'tsyringe'
 import type PostWrite from '@/entity/post/PostWrite'
-import type Post from '@/entity/post/Post'
 import { plainToInstance } from 'class-transformer'
+import Post from '@/entity/post/Post'
 
 @singleton()
 export default class PostRepository {
-    constructor(@inject(HttpRepository) private readonly httpRepository: HttpRepository) {}
+    constructor(@inject(HttpRepository) private readonly httpRepository: HttpRepository) {
+    }
 
     public write(request: PostWrite) {
         return this.httpRepository.post({
@@ -15,12 +16,13 @@ export default class PostRepository {
         })
     }
 
-    public get(postId: number): Promise<Post> {
+    public get(postId: number) {
         return this.httpRepository
             .get({
                 path: `/f1v3-api/posts/${postId}`
             })
             .then((response) => {
+                console.log(response)
                 return plainToInstance(Post, response)
             })
     }
