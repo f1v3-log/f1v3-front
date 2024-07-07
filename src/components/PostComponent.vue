@@ -4,6 +4,7 @@ import Post from '@/entity/post/Post'
 const props = defineProps<{
     post: Post
 }>()
+
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const props = defineProps<{
 
     a {
         text-decoration: none;
-        color: #470e0e;
+        color: #303030;
     }
 
     a:hover {
