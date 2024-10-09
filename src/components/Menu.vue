@@ -38,7 +38,7 @@ function logout() {
             <router-link to="/">처음으로</router-link>
         </li>
 
-        <li class="menu">
+        <li class="menu" v-if="state.profile != null">
             <router-link to="/write">글 작성</router-link>
         </li>
 
