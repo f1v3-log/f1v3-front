@@ -11,4 +11,8 @@ export default class ProfileRepository {
         localStorage.setItem('profile', JSON.stringify(json))
 
     }
+
+    public clear() {
+        localStorage.clear()
+    }
 }
