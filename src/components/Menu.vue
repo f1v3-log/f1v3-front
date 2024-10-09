@@ -3,12 +3,16 @@
 import { onBeforeMount } from 'vue'
 import { container } from 'tsyringe'
 import UserRepository from '@/repository/UserRepository'
+import ProfileRepository from '@/repository/ProfileRepository'
 
 const USER_REPOSITORY = container.resolve(UserRepository)
+const PROFILE_REPOSITORY = container.resolve(ProfileRepository)
+
 
 onBeforeMount(() => {
     USER_REPOSITORY.getProfile().then((user) => {
         console.log(user)
+        PROFILE_REPOSITORY.setProfile(user)
     })
 })
 </script>
