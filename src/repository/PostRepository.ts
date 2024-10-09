@@ -25,4 +25,10 @@ export default class PostRepository {
                 path: `/f1v3-api/posts?page=${page}&size=${size}`
             }, Post)
     }
+
+    public delete(postId: number) {
+        return this.httpRepository.delete({
+            path: `/f1v3-api/posts/${postId}`
+        })
+    }
 }
